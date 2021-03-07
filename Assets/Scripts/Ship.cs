@@ -1,9 +1,11 @@
 ﻿using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class Ship : MonoBehaviour
 {
+     [SerializeField] private TextMeshPro healthText;
      [SerializeField] private int playerIndex;
      [SerializeField] private float angle;
      private Vector2 inputVec;
@@ -19,6 +21,7 @@ public class Ship : MonoBehaviour
           angle += inputVec.x * -3;
           transform.rotation = Quaternion.Euler(new Vector3(0,0,angle));
           GetComponent<Rigidbody2D>().AddForce(240 * accel * transform.right);
+          healthText.gameObject.transform.position = new Vector3(transform.position.x, transform.position.y + 60, 0);
      }
 
      private void Update()
