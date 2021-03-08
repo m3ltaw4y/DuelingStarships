@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 1284991048428800044}
   - component: {fileID: 4977217090161837048}
   m_Layer: 0
-  m_Name: BoxBase
+  m_Name: BulletBase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -103,6 +103,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3d626241eb748a6b7aeba4d13744900, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  explosion: {fileID: 1284991048428800044}
   playerIndex: 0
 --- !u!50 &6666593126029720808
 Rigidbody2D:

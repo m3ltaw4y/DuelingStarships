@@ -9,6 +9,7 @@ public class Ship : Bullet {
      [SerializeField] private GameObject instructions;
      [SerializeField] private TextMeshProUGUI opponentScore;
      [SerializeField] private float angle;
+     [SerializeField] private ParticleSystem flames;
      private float accel;
      private float firing;
      private Vector2 vector;
@@ -23,7 +24,7 @@ public class Ship : Bullet {
           if (firing > 0 && (int) elapsed % 10 == 0)
                MakeBullet(bullet, transform.position).GetComponent<Rigidbody2D>().velocity = (Vector2)(transform.right.normalized * 310) + GetComponent<Rigidbody2D>().velocity;
      }
-     protected void OnCollisionEnter2D(Collision2D col) => ResetAll();
+     protected void OnCollisionEnter2D(Collision2D col) => Explode();
      protected override void OnTriggerEnter2D(Collider2D col) {
           if (col.gameObject.GetComponent<Bullet>() is Bullet bullet && bullet.playerIndex != playerIndex)
                Hit();
@@ -32,7 +33,7 @@ public class Ship : Bullet {
           healthText.text = healthText.text.Substring(1);
           if (healthText.text == string.Empty) {
                opponentScore.text = (Convert.ToInt32(opponentScore.text) + 1).ToString();
-               ResetAll();
+               Explode();
           }
      } 
      public Bullet MakeBullet(Bullet bulPrefab, Vector3 pos) { 
@@ -57,7 +58,7 @@ public class Ship : Bullet {
      public void OnAccel(InputValue input) {
           instructions.SetActive(false);
           accel = input.Get<float>();
-          if (accel > 0) GetComponentInChildren<ParticleSystem>().Play();
-          else GetComponentInChildren<ParticleSystem>().Stop();
+          if (accel > 0) flames.Play();
+          else flames.Stop();
      }
 }

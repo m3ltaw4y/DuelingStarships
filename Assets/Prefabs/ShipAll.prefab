@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f63e6ffca8f5493bbe3422bc5a541abf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  explosion: {fileID: 0}
   playerIndex: 0
 --- !u!1 &2027046727751094279
 GameObject:
@@ -263,6 +264,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f63e6ffca8f5493bbe3422bc5a541abf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  explosion: {fileID: 3963727021084908571}
   playerIndex: 0
 --- !u!1001 &2798081400396698679
 PrefabInstance:
@@ -392,6 +394,12 @@ PrefabInstance:
 --- !u!1 &8162961504432735774 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6313028565267059241, guid: 13fb132467a8be74d83e848cb2a8fc53,
+    type: 3}
+  m_PrefabInstance: {fileID: 2798081400396698679}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &3963727021084908571 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 1284991048428800044, guid: 13fb132467a8be74d83e848cb2a8fc53,
     type: 3}
   m_PrefabInstance: {fileID: 2798081400396698679}
   m_PrefabAsset: {fileID: 0}
@@ -544,6 +552,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 99892687681828637}
     m_Modifications:
+    - target: {fileID: 1139274926805696390, guid: 5a9793b1ba133644f8a9ae2925bf4474,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1635754556940435682, guid: 5a9793b1ba133644f8a9ae2925bf4474,
         type: 3}
       propertyPath: m_Mesh
