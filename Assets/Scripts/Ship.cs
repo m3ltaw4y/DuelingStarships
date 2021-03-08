@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections;
-using TMPro;
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 public class Ship : Bullet {
      [SerializeField] private Bullet bullet, mine;
-     [SerializeField] private TextMeshPro healthText;
-     [SerializeField] private TextMeshProUGUI instructions, opponentScore;
+     [SerializeField] private TMPro.TextMeshPro healthText;
+     [SerializeField] private TMPro.TextMeshProUGUI instructions, opponentScore;
      [SerializeField] private float angle;
      [SerializeField] private GameObject star;
      private float accel, firing;
@@ -40,7 +38,7 @@ public class Ship : Bullet {
      private void Hit() {
           healthText.text = healthText.text.Substring(1);
           if (healthText.text == string.Empty) {
-               opponentScore.text = (Convert.ToInt32(opponentScore.text) + 1).ToString();
+               opponentScore.text = (System.Convert.ToInt32(opponentScore.text) + 1).ToString();
                Explode(explosion);
           }
      } 
