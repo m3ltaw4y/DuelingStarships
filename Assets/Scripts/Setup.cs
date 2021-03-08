@@ -13,8 +13,3 @@ public class Setup : MonoBehaviour
         }
     }
 }
-
-//Screen.SetResolution(1280, 720, true);
-//Camera.main.aspect = 1280 / 720f;
-//Camera.main.pixelRect = new Rect(0,0,1280,720);
-//GetComponent<Camera>().pixelRect = new Rect(0,0,1280,720);

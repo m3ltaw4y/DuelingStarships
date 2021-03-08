@@ -25,11 +25,8 @@ public class Ship : Bullet
           
           healthText.gameObject.transform.position = new Vector3(transform.position.x, transform.position.y + 60, 0);
           if (firing > 0 && (int) elapsed % 10 == 0)
-          {
-               var bul = Instantiate(bullet, transform.position, Quaternion.identity, transform.parent);
-               bul.gameObject.SetActive(true);
-               bul.GetComponent<Rigidbody2D>().velocity = transform.right.normalized * 310;
-          }
+               MakeBullet(transform.position).GetComponent<Rigidbody2D>().velocity = transform.right.normalized * 310;
+          
      }
      
      protected void OnCollisionEnter2D(Collision2D col)
@@ -51,11 +48,17 @@ public class Ship : Bullet
           if (healthText.text == string.Empty)
           {
                opponentScore.text = (Convert.ToInt32(opponentScore.text) + 1).ToString();
-               Reset();
+               ResetAll();
           }
      }
+
+     void ResetAll()
+     {
+          foreach (var bul in FindObjectsOfType<Bullet>())
+               bul.Reset();
+     } 
      
-     protected override void Reset()
+     public override void Reset()
      {
           instructions.SetActive(true);
           GetComponent<Rigidbody2D>().velocity = Vector3.zero;
@@ -65,7 +68,14 @@ public class Ship : Bullet
      }
 
      public void OnFire(InputValue input) => firing = input.Get<float>();
-     public void OnBomb(InputValue input) => Debug.Log("Bomb!");
+     public void OnBomb(InputValue input) => MakeBullet(bullet.transform.position);
+     public Bullet MakeBullet(Vector3 pos)
+     { 
+          var bul = Instantiate(bullet, pos, Quaternion.identity, transform.parent);
+          bul.gameObject.SetActive(true);
+          return bul;
+     }
+     
      public void OnTurn(InputValue input) => vector = input.Get<Vector2>();
      public void OnAccel(InputValue input)
      {
