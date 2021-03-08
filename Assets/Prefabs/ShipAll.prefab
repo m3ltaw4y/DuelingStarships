@@ -1,19 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &9007456869349319059
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1165302894923721475}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f63e6ffca8f5493bbe3422bc5a541abf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  explosion: {fileID: 0}
-  playerIndex: 0
 --- !u!1 &2027046727751094279
 GameObject:
   m_ObjectHideFlags: 0
@@ -252,20 +238,6 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   m_maskType: 0
---- !u!114 &2502360342600883742
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8162961504432735774}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f63e6ffca8f5493bbe3422bc5a541abf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  explosion: {fileID: 3963727021084908571}
-  playerIndex: 0
 --- !u!1001 &2798081400396698679
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -378,6 +350,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5946348514477035515, guid: 13fb132467a8be74d83e848cb2a8fc53,
+        type: 3}
+      propertyPath: lifeTime
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 6313028565267059241, guid: 13fb132467a8be74d83e848cb2a8fc53,
         type: 3}
       propertyPath: m_Name
@@ -388,21 +365,20 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 5946348514477035515, guid: 13fb132467a8be74d83e848cb2a8fc53, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 13fb132467a8be74d83e848cb2a8fc53, type: 3}
---- !u!1 &8162961504432735774 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6313028565267059241, guid: 13fb132467a8be74d83e848cb2a8fc53,
+--- !u!114 &8381590665390627788 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5946348514477035515, guid: 13fb132467a8be74d83e848cb2a8fc53,
     type: 3}
   m_PrefabInstance: {fileID: 2798081400396698679}
   m_PrefabAsset: {fileID: 0}
---- !u!198 &3963727021084908571 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 1284991048428800044, guid: 13fb132467a8be74d83e848cb2a8fc53,
-    type: 3}
-  m_PrefabInstance: {fileID: 2798081400396698679}
-  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3d626241eb748a6b7aeba4d13744900, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &5167773676343048490
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -527,19 +503,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 13fb132467a8be74d83e848cb2a8fc53, type: 3}
---- !u!1 &1165302894923721475 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6313028565267059241, guid: 13fb132467a8be74d83e848cb2a8fc53,
-    type: 3}
-  m_PrefabInstance: {fileID: 5167773676343048490}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1527339020996703953 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5946348514477035515, guid: 13fb132467a8be74d83e848cb2a8fc53,
     type: 3}
   m_PrefabInstance: {fileID: 5167773676343048490}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1165302894923721475}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d3d626241eb748a6b7aeba4d13744900, type: 3}
@@ -626,7 +596,7 @@ PrefabInstance:
         type: 3}
       propertyPath: mine
       value: 
-      objectReference: {fileID: 2502360342600883742}
+      objectReference: {fileID: 8381590665390627788}
     - target: {fileID: 2584829156322761784, guid: 5a9793b1ba133644f8a9ae2925bf4474,
         type: 3}
       propertyPath: bullet

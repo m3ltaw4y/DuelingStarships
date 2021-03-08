@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 public class Ship : Bullet {
      [SerializeField] private Bullet bullet;
-     [SerializeField] private Mine mine;
+     [SerializeField] private Bullet mine;
      [SerializeField] private TextMeshPro healthText;
      [SerializeField] private GameObject instructions;
      [SerializeField] private TextMeshProUGUI opponentScore;
@@ -24,7 +24,7 @@ public class Ship : Bullet {
           if (firing > 0 && (int) elapsed % 10 == 0)
                MakeBullet(bullet, transform.position).GetComponent<Rigidbody2D>().velocity = (Vector2)(transform.right.normalized * 310) + GetComponent<Rigidbody2D>().velocity;
      }
-     protected void OnCollisionEnter2D(Collision2D col) => Explode();
+     protected void OnCollisionEnter2D(Collision2D col) => Explode(explosion);
      protected override void OnTriggerEnter2D(Collider2D col) {
           if (col.gameObject.GetComponent<Bullet>() is Bullet bullet && bullet.playerIndex != playerIndex)
                Hit();
@@ -33,7 +33,7 @@ public class Ship : Bullet {
           healthText.text = healthText.text.Substring(1);
           if (healthText.text == string.Empty) {
                opponentScore.text = (Convert.ToInt32(opponentScore.text) + 1).ToString();
-               Explode();
+               Explode(explosion);
           }
      } 
      public Bullet MakeBullet(Bullet bulPrefab, Vector3 pos) { 
@@ -53,7 +53,7 @@ public class Ship : Bullet {
           transform.SetPositionAndRotation(new Vector2(playerIndex == 0 ? -400 : 400, UnityEngine.Random.Range(-250, 250)), Quaternion.Euler(new Vector3(0,0,angle)));
      }
      public void OnFire(InputValue input) => firing = input.Get<float>();
-     public void OnBomb(InputValue input) => MakeBullet(mine, mine.transform.position);
+     public void OnBomb(InputValue input) => MakeBullet(mine, mine.transform.position).GetComponent<Rigidbody2D>().velocity = 2 * new Vector2(UnityEngine.Random.Range(-1f,1f),UnityEngine.Random.Range(-1f,1f)).normalized;
      public void OnTurn(InputValue input) => vector = input.Get<Vector2>();
      public void OnAccel(InputValue input) {
           instructions.SetActive(false);
