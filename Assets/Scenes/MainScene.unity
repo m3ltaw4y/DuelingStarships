@@ -385,7 +385,6 @@ GameObject:
   m_Component:
   - component: {fileID: 405266397}
   - component: {fileID: 405266396}
-  - component: {fileID: 405266398}
   m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
@@ -436,19 +435,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1280, y: 720}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &405266398
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 405266395}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5755a0bbf759c0443b728dda07b1a84e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  star: {fileID: 230273285}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -647,6 +633,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5669873031556170812, guid: 1e06584bcad287c409679edfea2ef345,
         type: 3}
+      propertyPath: star
+      value: 
+      objectReference: {fileID: 230273285}
+    - target: {fileID: 5669873031556170812, guid: 1e06584bcad287c409679edfea2ef345,
+        type: 3}
       propertyPath: instructions
       value: 
       objectReference: {fileID: 7289711}
@@ -749,6 +740,11 @@ PrefabInstance:
       propertyPath: m_textInfo.characterCount
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5138879249533005157, guid: 2cf380b300b7a7b4facc75141948f04a,
+        type: 3}
+      propertyPath: star
+      value: 
+      objectReference: {fileID: 230273285}
     - target: {fileID: 5138879249533005157, guid: 2cf380b300b7a7b4facc75141948f04a,
         type: 3}
       propertyPath: instructions

@@ -8,12 +8,17 @@ public class Ship : Bullet {
      [SerializeField] private TextMeshPro healthText;
      [SerializeField] private TextMeshProUGUI instructions, opponentScore;
      [SerializeField] private float angle;
+     [SerializeField] private GameObject star;
      private float accel, firing;
      private Vector2 vector;
-     private void Awake() => Reset();
+     void Start() {
+          Reset();
+          for (var i = 0; i < 50; i++) 
+               Instantiate(star, new Vector3(UnityEngine.Random.Range(-640, 641), UnityEngine.Random.Range(-360, 361), 0), Quaternion.identity).GetComponent<SpriteRenderer>().color = new Color(UnityEngine.Random.Range(.5f,1), 1, 1);
+     }
      protected override void FixedUpdate() {
           elapsed += 1;
-          transform.position = new Vector2((transform.position.x + 1240 + 640) % 1240 - 640, (transform.position.y + 720 + 360) % 720 - 360);//screen wrap
+          transform.position = new Vector2((transform.position.x + 1240 + 640) % 1240 - 640, (transform.position.y + 720 + 360) % 720 - 360);
           angle += vector.x * -3;
           transform.rotation = Quaternion.Euler(new Vector3(0,0,angle));
           GetComponent<Rigidbody2D>().AddForce(240 * accel * transform.right);

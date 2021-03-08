@@ -8,7 +8,7 @@ public class Bullet : MonoBehaviour {
     protected float elapsed;
     public virtual void Reset() => Destroy(gameObject);
     protected virtual void FixedUpdate() {
-        transform.position = new Vector2((transform.position.x + 1240 + 640) % 1240 - 640, (transform.position.y + 720 + 360) % 720 - 360);//screen wrap
+        transform.position = new Vector2((transform.position.x + 1240 + 640) % 1240 - 640, (transform.position.y + 720 + 360) % 720 - 360);
         elapsed += Time.deltaTime;
         if (GetComponent<SpriteRenderer>().enabled && elapsed > lifeTime) Explode(explosion);
     }
