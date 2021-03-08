@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 99892687681828637}
+  - component: {fileID: 4319700282851487179}
   m_Layer: 0
   m_Name: ShipAll
   m_TagString: Untagged
@@ -32,6 +33,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!111 &4319700282851487179
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2027046727751094279}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 427ded468a76dcd4dbf842c946c5651b, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 427ded468a76dcd4dbf842c946c5651b, type: 2}
+  - {fileID: 7400000, guid: 3270f103520c44b4abb46a8a85ed7daa, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &6828813497813716566
 GameObject:
   m_ObjectHideFlags: 0
@@ -594,6 +612,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2584829156322761784, guid: 5a9793b1ba133644f8a9ae2925bf4474,
         type: 3}
+      propertyPath: fade
+      value: 
+      objectReference: {fileID: 4319700282851487179}
+    - target: {fileID: 2584829156322761784, guid: 5a9793b1ba133644f8a9ae2925bf4474,
+        type: 3}
       propertyPath: mine
       value: 
       objectReference: {fileID: 8381590665390627788}
@@ -602,6 +625,16 @@ PrefabInstance:
       propertyPath: bullet
       value: 
       objectReference: {fileID: 1527339020996703953}
+    - target: {fileID: 2584829156322761784, guid: 5a9793b1ba133644f8a9ae2925bf4474,
+        type: 3}
+      propertyPath: fadeIn
+      value: 
+      objectReference: {fileID: 4319700282851487179}
+    - target: {fileID: 2584829156322761784, guid: 5a9793b1ba133644f8a9ae2925bf4474,
+        type: 3}
+      propertyPath: fadeOut
+      value: 
+      objectReference: {fileID: 4319700282851487179}
     - target: {fileID: 2584829156322761784, guid: 5a9793b1ba133644f8a9ae2925bf4474,
         type: 3}
       propertyPath: healthText
