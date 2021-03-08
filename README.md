@@ -23,3 +23,4 @@ With these comments in mind, I wanted to prove it could be done, not to mention 
 Due to the nature of this challenge, I have often sacrificied efficiency, clarity, and style in the name of saving lines.  
 For example, using GetComponent over and over on the same component allows me to avoid serializing it, saving 1 line of code at the cost of performance. 
 You should definitely not use any of this code in a real project, fair warning.
+A cleaner more sensible version of this would be more lines of code, but it should still be entirely possible without going anywhere near 300 lines. In this case however, my only goal was minimizing lines of code.
