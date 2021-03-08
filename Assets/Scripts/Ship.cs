@@ -1,17 +1,14 @@
 ﻿using System;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 public class Ship : Bullet {
-     [SerializeField] private Bullet bullet;
-     [SerializeField] private Bullet mine;
+     [SerializeField] private Bullet bullet, mine;
      [SerializeField] private TextMeshPro healthText;
-     [SerializeField] private GameObject instructions;
-     [SerializeField] private TextMeshProUGUI opponentScore;
+     [SerializeField] private TextMeshProUGUI instructions, opponentScore;
      [SerializeField] private float angle;
-     [SerializeField] private ParticleSystem flames;
-     private float accel;
-     private float firing;
+     private float accel, firing;
      private Vector2 vector;
      private void Awake() => Reset();
      protected override void FixedUpdate() {
@@ -25,9 +22,13 @@ public class Ship : Bullet {
                MakeBullet(bullet, transform.position).GetComponent<Rigidbody2D>().velocity = (Vector2)(transform.right.normalized * 310) + GetComponent<Rigidbody2D>().velocity;
      }
      protected void OnCollisionEnter2D(Collision2D col) => Explode(explosion);
+     protected override void Explode(ParticleSystem explode) {
+          healthText.text = string.Empty;
+          base.Explode(explode);
+          StartCoroutine(ResetAll());
+     }
      protected override void OnTriggerEnter2D(Collider2D col) {
-          if (col.gameObject.GetComponent<Bullet>() is Bullet bullet && bullet.playerIndex != playerIndex)
-               Hit();
+          if (col.gameObject.GetComponent<Bullet>() is Bullet bullet && bullet.playerIndex != playerIndex) Hit();
      }
      private void Hit() {
           healthText.text = healthText.text.Substring(1);
@@ -41,12 +42,15 @@ public class Ship : Bullet {
           bul.gameObject.SetActive(true);
           return bul;
      }
-     void ResetAll() {
-          foreach (var bul in FindObjectsOfType<Bullet>())
-               bul.Reset();
+     IEnumerator ResetAll() {
+          foreach (var bul in FindObjectsOfType<Bullet>()) bul.fade.Play();
+          yield return new WaitForSeconds(1);
+          foreach (var bul in FindObjectsOfType<Bullet>()) bul.Reset();
      }
      public override void Reset() {
-          instructions.SetActive(true);
+          fade.Play("FadeIn");
+          GetComponent<SpriteRenderer>().enabled = true;
+          instructions.gameObject.SetActive(true);
           GetComponent<Rigidbody2D>().velocity = Vector3.zero;
           healthText.text = ".....";
           angle = playerIndex == 0 ? 0 : 180; 
@@ -56,9 +60,9 @@ public class Ship : Bullet {
      public void OnBomb(InputValue input) => MakeBullet(mine, mine.transform.position).GetComponent<Rigidbody2D>().velocity = 2 * new Vector2(UnityEngine.Random.Range(-1f,1f),UnityEngine.Random.Range(-1f,1f)).normalized;
      public void OnTurn(InputValue input) => vector = input.Get<Vector2>();
      public void OnAccel(InputValue input) {
-          instructions.SetActive(false);
+          instructions.gameObject.SetActive(false);
           accel = input.Get<float>();
-          if (accel > 0) flames.Play();
-          else flames.Stop();
+          if (accel > 0) bigExplosion.Play();
+          else bigExplosion.Stop();
      }
 }
