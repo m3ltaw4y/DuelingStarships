@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class Setup : MonoBehaviour
 {
@@ -12,11 +11,6 @@ public class Setup : MonoBehaviour
             var newStar = Instantiate(star, new Vector3(Random.Range(-640, 641), Random.Range(-360, 361), 0), Quaternion.identity);
             newStar.GetComponent<SpriteRenderer>().color = new Color(Random.Range(.5f,1), 1, 1);
         }
-    }
-
-    
-    void Update()
-    {
     }
 }
 

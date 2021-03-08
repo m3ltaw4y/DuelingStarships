@@ -3,54 +3,62 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Ship : MonoBehaviour
+public class Ship : Bullet
 {
+     [SerializeField] private Bullet bullet;
      [SerializeField] private TextMeshPro healthText;
-     [SerializeField] private int playerIndex;
      [SerializeField] private float angle;
-     private Vector2 inputVec;
      private float accel;
-     private void Awake()
-     {
-          transform.position = new Vector2(playerIndex == 0 ? -400 : 400, UnityEngine.Random.Range(-250, 250));
-     }
+     private float firing;
+     private Vector2 vector;
+     private void Awake() => Reset();
 
-     private void FixedUpdate()
+     protected override void FixedUpdate()
      {
+          elapsed += 1;
           transform.position = new Vector2((Math.Abs(transform.position.x + 1240 + 640)) % 1240 - 640, Math.Abs((transform.position.y + 720 + 360)) % 720 - 360);//screen wrap
-          angle += inputVec.x * -3;
+          angle += vector.x * -3;
           transform.rotation = Quaternion.Euler(new Vector3(0,0,angle));
           GetComponent<Rigidbody2D>().AddForce(240 * accel * transform.right);
           healthText.gameObject.transform.position = new Vector3(transform.position.x, transform.position.y + 60, 0);
-     }
-
-     private void Update()
-     {
-          //if (Input.GetButtonDown("Fire1"))
-          //     Instantiate(projectile, transform.position, transform.rotation);
-          //if (Input.GetButtonDown(accel))
-          //     GetComponent<Rigidbody2D>().AddForce(new Vector2(0.1f, 0.1f));
+          if (firing > 0 && (int) elapsed % 10 == 0)
+          {
+               var bul = Instantiate(bullet, transform.position, Quaternion.identity, transform.parent);
+               bul.gameObject.SetActive(true);
+               bul.GetComponent<Rigidbody2D>().velocity = transform.right.normalized * 310;
+          }
      }
      
-     
-     public void OnFire()
+     protected void OnCollisionEnter2D(Collision2D col)
      {
-          Debug.Log("Fire!");
-     }
-    
-     public void OnBomb()
-     {
-          Debug.Log("Bomb!");
-     }
-    
-     public void OnTurn(InputValue input)
-     {
-          inputVec = input.Get<Vector2>();
+          Debug.Log("OnCollisionEnter2D");
+          if (col.otherRigidbody.GetComponent<Ship>() is Ship otherShip)
+               Reset();
      }
 
-     public void OnAccel(InputValue input)
+     protected override void OnTriggerEnter2D(Collider2D col)
      {
-          accel = input.Get<float>();
-          Debug.Log("Accel!");
+          if (col.gameObject.GetComponent<Bullet>() is Bullet bullet && bullet.playerIndex != playerIndex)
+               Hit();
      }
+     
+     private void Hit()
+     {
+          healthText.text = healthText.text.Substring(1);
+          if (healthText.text == string.Empty)
+               Reset();
+     }
+     
+     protected override void Reset()
+     {
+          GetComponent<Rigidbody2D>().velocity = Vector3.zero;
+          healthText.text = ".....";
+          angle = playerIndex == 0 ? 0 : 180; 
+          transform.SetPositionAndRotation(new Vector2(playerIndex == 0 ? -400 : 400, UnityEngine.Random.Range(-250, 250)), Quaternion.Euler(new Vector3(0,0,angle)));
+     }
+
+     public void OnFire(InputValue input) => firing = input.Get<float>();
+     public void OnBomb(InputValue input) => Debug.Log("Bomb!");
+     public void OnTurn(InputValue input) => vector = input.Get<Vector2>();
+     public void OnAccel(InputValue input) => accel = input.Get<float>();
 }
