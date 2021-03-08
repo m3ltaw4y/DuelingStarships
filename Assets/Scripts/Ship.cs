@@ -57,5 +57,7 @@ public class Ship : Bullet {
      public void OnAccel(InputValue input) {
           instructions.SetActive(false);
           accel = input.Get<float>();
+          if (accel > 0) GetComponentInChildren<ParticleSystem>().Play();
+          else GetComponentInChildren<ParticleSystem>().Stop();
      }
 }
