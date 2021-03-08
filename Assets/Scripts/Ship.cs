@@ -23,7 +23,7 @@ public class Ship : Bullet
           GetComponent<Rigidbody2D>().AddForce(240 * accel * transform.right);
           healthText.gameObject.transform.position = new Vector3(transform.position.x, transform.position.y + 60, 0);
           if (firing > 0 && (int) elapsed % 10 == 0)
-               MakeBullet(bullet, transform.position).GetComponent<Rigidbody2D>().velocity = transform.right.normalized * 310;
+               MakeBullet(bullet, transform.position).GetComponent<Rigidbody2D>().velocity = (Vector2)(transform.right.normalized * 310) + GetComponent<Rigidbody2D>().velocity;
      }
      protected void OnCollisionEnter2D(Collision2D col) => ResetAll();
      protected override void OnTriggerEnter2D(Collider2D col)
