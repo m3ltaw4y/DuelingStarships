@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 public class Ship : Bullet
 {
      [SerializeField] private Bullet bullet;
+     [SerializeField] private Mine mine;
      [SerializeField] private TextMeshPro healthText;
      [SerializeField] private GameObject instructions;
      [SerializeField] private TextMeshProUGUI opponentScore;
@@ -22,7 +23,7 @@ public class Ship : Bullet
           GetComponent<Rigidbody2D>().AddForce(240 * accel * transform.right);
           healthText.gameObject.transform.position = new Vector3(transform.position.x, transform.position.y + 60, 0);
           if (firing > 0 && (int) elapsed % 10 == 0)
-               MakeBullet(transform.position).GetComponent<Rigidbody2D>().velocity = transform.right.normalized * 310;
+               MakeBullet(bullet, transform.position).GetComponent<Rigidbody2D>().velocity = transform.right.normalized * 310;
      }
      protected void OnCollisionEnter2D(Collision2D col) => ResetAll();
      protected override void OnTriggerEnter2D(Collider2D col)
@@ -39,9 +40,9 @@ public class Ship : Bullet
                ResetAll();
           }
      } 
-     public Bullet MakeBullet(Vector3 pos)
+     public Bullet MakeBullet(Bullet bulPrefab, Vector3 pos)
      { 
-          var bul = Instantiate(bullet, pos, Quaternion.identity, transform.parent);
+          var bul = Instantiate(bulPrefab, pos, Quaternion.identity, transform.parent);
           bul.gameObject.SetActive(true);
           return bul;
      }
@@ -59,7 +60,7 @@ public class Ship : Bullet
           transform.SetPositionAndRotation(new Vector2(playerIndex == 0 ? -400 : 400, UnityEngine.Random.Range(-250, 250)), Quaternion.Euler(new Vector3(0,0,angle)));
      }
      public void OnFire(InputValue input) => firing = input.Get<float>();
-     public void OnBomb(InputValue input) => MakeBullet(bullet.transform.position);
+     public void OnBomb(InputValue input) => MakeBullet(mine, mine.transform.position);
      public void OnTurn(InputValue input) => vector = input.Get<Vector2>();
      public void OnAccel(InputValue input)
      {

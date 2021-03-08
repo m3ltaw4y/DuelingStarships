@@ -72,6 +72,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: ShipAllRed
       objectReference: {fileID: 0}
+    - target: {fileID: 2502360342600883742, guid: 2cf380b300b7a7b4facc75141948f04a,
+        type: 3}
+      propertyPath: playerIndex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3201895874503815599, guid: 2cf380b300b7a7b4facc75141948f04a,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 72583fe040b13d046a901160227b8f07,
+        type: 3}
     - target: {fileID: 3398883050797878276, guid: 2cf380b300b7a7b4facc75141948f04a,
         type: 3}
       propertyPath: m_Mesh
