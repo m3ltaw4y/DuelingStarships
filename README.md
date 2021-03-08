@@ -24,3 +24,8 @@ Due to the nature of this challenge, I have often sacrificied efficiency, clarit
 For example, using GetComponent over and over on the same component allows me to avoid serializing it, saving 1 line of code at the cost of performance. 
 You should definitely not use any of this code in a real project, fair warning.
 A cleaner more sensible version of this would be more lines of code, but it should still be entirely possible without going anywhere near 300 lines. In this case however, my only goal was minimizing lines of code.
+
+Along the way I discovered a few bugs in the original:   
+1.  Instructions text is basically trying to disspear when you move, but because bullets explode after a couple seconds if you fire the instructions will disappear while bullets are exploding and then reappear after.
+2.  Stars are randomly sized between 2 and 2.99 pixels, which means they will always be 2 (I kept this behaviour for my port).
+3.  Since the fire button only shoots on mod 10 == 0 ticks, pressing the fire button, even rapidly, will not necessary cause anything to happen.  In a real game I'd expect the first press to fire immediately, and then keep firing at the fixed rate  (I kept this behaviour for my port).
