@@ -7,6 +7,8 @@ public class Ship : Bullet
 {
      [SerializeField] private Bullet bullet;
      [SerializeField] private TextMeshPro healthText;
+     [SerializeField] private GameObject instructions;
+     [SerializeField] private TextMeshProUGUI opponentScore;
      [SerializeField] private float angle;
      private float accel;
      private float firing;
@@ -20,6 +22,7 @@ public class Ship : Bullet
           angle += vector.x * -3;
           transform.rotation = Quaternion.Euler(new Vector3(0,0,angle));
           GetComponent<Rigidbody2D>().AddForce(240 * accel * transform.right);
+          
           healthText.gameObject.transform.position = new Vector3(transform.position.x, transform.position.y + 60, 0);
           if (firing > 0 && (int) elapsed % 10 == 0)
           {
@@ -46,11 +49,15 @@ public class Ship : Bullet
      {
           healthText.text = healthText.text.Substring(1);
           if (healthText.text == string.Empty)
+          {
+               opponentScore.text = (Convert.ToInt32(opponentScore.text) + 1).ToString();
                Reset();
+          }
      }
      
      protected override void Reset()
      {
+          instructions.SetActive(true);
           GetComponent<Rigidbody2D>().velocity = Vector3.zero;
           healthText.text = ".....";
           angle = playerIndex == 0 ? 0 : 180; 
@@ -60,5 +67,9 @@ public class Ship : Bullet
      public void OnFire(InputValue input) => firing = input.Get<float>();
      public void OnBomb(InputValue input) => Debug.Log("Bomb!");
      public void OnTurn(InputValue input) => vector = input.Get<Vector2>();
-     public void OnAccel(InputValue input) => accel = input.Get<float>();
+     public void OnAccel(InputValue input)
+     {
+          instructions.SetActive(false);
+          accel = input.Get<float>();
+     }
 }
