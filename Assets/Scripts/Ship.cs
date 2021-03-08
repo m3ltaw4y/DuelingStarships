@@ -44,7 +44,7 @@ public class Ship : Bullet {
      }
      IEnumerator ResetAll() {
           foreach (var bul in FindObjectsOfType<Bullet>()) bul.fade.Play();
-          yield return new WaitForSeconds(1);
+          yield return new WaitForSeconds(2);
           foreach (var bul in FindObjectsOfType<Bullet>()) bul.Reset();
      }
      public override void Reset() {
