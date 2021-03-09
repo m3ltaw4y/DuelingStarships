@@ -147,18 +147,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c4a8103c3724e369873c6fe8bc6f806, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  explosion: {fileID: 526786071007010130}
-  bigExplosion: {fileID: 5447064218511076242}
-  fadeOut: {fileID: 0}
-  fadeIn: {fileID: 0}
-  playerIndex: 0
+  explosion:
+  - {fileID: 0}
+  bigExplosion:
+  - {fileID: 0}
+  fade: {fileID: 0}
   lifeTime: 0
+  playerIndex: 0
   bullet: {fileID: 0}
   mine: {fileID: 0}
   healthText: {fileID: 0}
   instructions: {fileID: 0}
   opponentScore: {fileID: 0}
   angle: 0
+  star: {fileID: 0}
+  flames: []
 --- !u!114 &1275328163722175286
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -246,7 +249,7 @@ ParticleSystem:
   prewarm: 0
   playOnAwake: 0
   useUnscaledTime: 0
-  autoRandomSeed: 1
+  autoRandomSeed: 0
   useRigidbodyForVelocity: 1
   startDelay:
     serializedVersion: 2
@@ -304,7 +307,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 0
+  randomSeed: 4
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -5067,7 +5070,7 @@ ParticleSystem:
   prewarm: 0
   playOnAwake: 0
   useUnscaledTime: 0
-  autoRandomSeed: 1
+  autoRandomSeed: 0
   useRigidbodyForVelocity: 1
   startDelay:
     serializedVersion: 2
@@ -5125,7 +5128,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 0
+  randomSeed: 3
   InitialModule:
     serializedVersion: 3
     enabled: 1

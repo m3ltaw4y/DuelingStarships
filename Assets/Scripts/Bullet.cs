@@ -4,8 +4,13 @@ public class Bullet : MonoBehaviour {
     [SerializeField] protected ParticleSystem[] explosion, bigExplosion;
     [SerializeField] public Animation fade;
     [SerializeField] public int lifeTime;
-    public int playerIndex;
+    public int playerIndex, seed;
     protected float elapsed, accel, firing;
+    private void Awake() {
+        seed = Random.Range(int.MinValue, int.MaxValue);
+        foreach(var system in bigExplosion) system.randomSeed = (uint) seed;
+        foreach(var system in explosion) system.randomSeed = (uint) seed;
+    }
     public virtual void Reset() => Destroy(gameObject);
     protected virtual void FixedUpdate() {
         transform.position = new Vector2((transform.position.x + 1280 + 640) % 1280 - 640, (transform.position.y + 720 + 360) % 720 - 360);
@@ -18,6 +23,6 @@ public class Bullet : MonoBehaviour {
     protected virtual void Explode(ParticleSystem[] explode) {
         GetComponent<SpriteRenderer>().enabled = GetComponent<Rigidbody2D>().simulated = false;
         foreach(var system in bigExplosion) system.Stop();
-        foreach(var system in explode) system.Play(false);
+        foreach (var system in explode) system.Play(false);
     }
 }
