@@ -29,3 +29,5 @@ Along the way I discovered a few bugs in the original:
 1.  Instructions text is basically trying to disappear when you move, but because bullets explode after a couple seconds if you fire the instructions will disappear while bullets are exploding and then reappear after.
 2.  Stars are randomly sized between 2 and 2.99 pixels, which means they will always be 2 (I kept this behaviour for my port).
 3.  Since the fire button only shoots on mod 10 == 0 ticks, pressing the fire button, even rapidly, will not necessary cause anything to happen.  In a real game I'd expect the first press to fire immediately, and then keep firing at the fixed rate  (I kept this behaviour for my port).
+
+Video of gameplay here: https://youtu.be/qnsGGuedRtk
