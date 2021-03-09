@@ -14,7 +14,7 @@ public class Ship : Bullet {
                Instantiate(star, new Vector3(UnityEngine.Random.Range(-640, 641), UnityEngine.Random.Range(-360, 361), 90), Quaternion.identity).GetComponent<SpriteRenderer>().color = new Color(UnityEngine.Random.Range(.5f,1), 1, 1);
      }
      protected override void FixedUpdate() {
-          transform.position = new Vector2((transform.position.x + 1240 + 640) % 1240 - 640, (transform.position.y + 720 + 360) % 720 - 360);
+          transform.position = new Vector2((transform.position.x + 1280 + 640) % 1280 - 640, (transform.position.y + 720 + 360) % 720 - 360);
           angle += vector.x * -3;
           foreach (var trans in flames)
                trans.rotation = Quaternion.Euler(new Vector3(0,0,angle));
