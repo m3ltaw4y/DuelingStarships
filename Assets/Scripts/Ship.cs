@@ -3,32 +3,30 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 public class Ship : Bullet {
      [SerializeField] private Bullet bullet, mine;
-     [SerializeField] private TMPro.TextMeshPro healthText;
-     [SerializeField] private TMPro.TextMeshProUGUI instructions, opponentScore;
+     [SerializeField] private TMPro.TMP_Text healthText, instructions, opponentScore;
      [SerializeField] private float angle;
      [SerializeField] private GameObject star;
-     private float accel, firing;
+     [SerializeField] private Transform[] flames;
      private Vector2 vector;
      void Start() {
           Reset();
           for (var i = 0; i < 50; i++) 
-               Instantiate(star, new Vector3(UnityEngine.Random.Range(-640, 641), UnityEngine.Random.Range(-360, 361), 0), Quaternion.identity).GetComponent<SpriteRenderer>().color = new Color(UnityEngine.Random.Range(.5f,1), 1, 1);
+               Instantiate(star, new Vector3(UnityEngine.Random.Range(-640, 641), UnityEngine.Random.Range(-360, 361), 90), Quaternion.identity).GetComponent<SpriteRenderer>().color = new Color(UnityEngine.Random.Range(.5f,1), 1, 1);
      }
      protected override void FixedUpdate() {
-          elapsed += 1;
           transform.position = new Vector2((transform.position.x + 1240 + 640) % 1240 - 640, (transform.position.y + 720 + 360) % 720 - 360);
           angle += vector.x * -3;
-          transform.rotation = Quaternion.Euler(new Vector3(0,0,angle));
+          foreach (var trans in flames)
+               trans.rotation = Quaternion.Euler(new Vector3(0,0,angle));
           GetComponent<Rigidbody2D>().AddForce(240 * accel * transform.right);
           healthText.gameObject.transform.position = new Vector3(transform.position.x, transform.position.y + 60, 0);
-          if (healthText.text != string.Empty && firing > 0 && (int) elapsed % 10 == 0)
+          if (healthText.text != string.Empty && firing > 0 && (int) ++elapsed % 10 == 0)
                MakeBullet(bullet, transform.position).GetComponent<Rigidbody2D>().velocity = (Vector2)(transform.right.normalized * 310) + GetComponent<Rigidbody2D>().velocity;
      }
      protected void OnCollisionEnter2D(Collision2D col) => Explode(explosion);
-     protected override void Explode(ParticleSystem explode) {
+     protected override void Explode(ParticleSystem[] explode) {
           gameNotOver = false;
           healthText.text = string.Empty;
-          bigExplosion.Stop();
           base.Explode(explode);
           StartCoroutine(ResetAll());
      }
@@ -37,10 +35,9 @@ public class Ship : Bullet {
      }
      private void Hit() {
           healthText.text = healthText.text.Substring(1);
-          if (healthText.text == string.Empty) {
-               opponentScore.text = (System.Convert.ToInt32(opponentScore.text) + 1).ToString();
+          opponentScore.text = healthText.text == string.Empty ? (System.Convert.ToInt32(opponentScore.text) + 1).ToString() : opponentScore.text;
+          if (healthText.text == string.Empty) 
                Explode(explosion);
-          }
      } 
      public Bullet MakeBullet(Bullet bulPrefab, Vector3 pos) { 
           var bul = Instantiate(bulPrefab, pos, Quaternion.identity, transform.parent);
@@ -71,7 +68,8 @@ public class Ship : Bullet {
      public void OnAccel(InputValue input) {
           instructions.gameObject.SetActive(false);
           accel = input.Get<float>();
-          if (accel > 0) bigExplosion.Play();
-          else bigExplosion.Stop();
+          foreach (var system in bigExplosion)
+               if (accel > 0 && healthText.text != string.Empty) system.Play();
+               else system.Stop();
      }
 }
