@@ -9,7 +9,7 @@ public class Ship : Bullet {
      void Start() {
           Reset();
           for (var i = 0; i < 50; i++) 
-               Instantiate(star, new Vector3(UnityEngine.Random.Range(-640, 641), UnityEngine.Random.Range(-360, 361), 90), Quaternion.identity).GetComponent<SpriteRenderer>().color = new Color(UnityEngine.Random.Range(.5f,1), 1, 1);
+               Instantiate(star, new Vector3(Random.Range(-640, 641), Random.Range(-360, 361), 90), Quaternion.identity).GetComponent<SpriteRenderer>().color = new Color(Random.Range(.5f,1), 1, 1);
      }
      protected override void FixedUpdate() {
           transform.position = new Vector2((transform.position.x + 1280 + 640) % 1280 - 640, (transform.position.y + 720 + 360) % 720 - 360);
