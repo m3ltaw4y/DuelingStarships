@@ -59,7 +59,7 @@ public class Ship : Bullet {
           transform.SetPositionAndRotation(new Vector2(playerIndex == 0 ? -400 : 400, UnityEngine.Random.Range(-250, 250)), Quaternion.Euler(new Vector3(0,0,angle)));
      }
      public void OnFire(UnityEngine.InputSystem.InputValue input) => firing = input.Get<float>();
-     public void OnBomb(UnityEngine.InputSystem.InputValue input) => MakeBullet(mine, mine.transform.position,2 * new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)).normalized);
+     public void OnBomb(UnityEngine.InputSystem.InputValue input)=> MakeBullet(mine, mine.transform.position,2 * new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)).normalized);
      public void OnTurn(UnityEngine.InputSystem.InputValue input) => vector = input.Get<Vector2>();
      public void OnAccel(UnityEngine.InputSystem.InputValue input) {
           instructions.gameObject.SetActive(false);
